@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,10 +32,9 @@
       line-height: 1.5;
     }
 
-    /* HEADER */
     header {
-      background: rgba(231, 213, 189, 0.96);
-      padding: 16px 20px;
+      background: rgba(231, 213, 189, 0.97);
+      padding: 15px 18px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -66,15 +66,15 @@
       font-size: 25px;
       cursor: pointer;
       color: var(--brown);
-      background: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.6);
+      border: none;
     }
 
-    /* MOBILE MENU */
     .mobile-menu {
       display: none;
       max-width: 1100px;
       margin: 12px auto 0;
-      background: var(--white);
+      background: white;
       border-radius: 15px;
       padding: 10px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.08);
@@ -94,33 +94,31 @@
       background: var(--beige-light);
     }
 
-    /* HERO */
     .hero {
       max-width: 1100px;
       margin: auto;
-      padding: 65px 20px 45px;
+      padding: 55px 20px 35px;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 42px;
+      font-size: 40px;
       color: var(--brown-dark);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 800;
     }
 
     .hero p {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--brown-light);
-      margin-bottom: 28px;
+      margin-bottom: 25px;
     }
 
-    /* SEARCH */
     .search {
       max-width: 680px;
       margin: auto;
       display: flex;
-      background: var(--white);
+      background: white;
       border-radius: 50px;
       padding: 6px;
       box-shadow: 0 8px 25px rgba(70,51,41,0.10);
@@ -132,7 +130,7 @@
       min-width: 0;
       border: none;
       outline: none;
-      padding: 14px 18px;
+      padding: 13px 18px;
       font-size: 16px;
       border-radius: 40px;
       color: var(--brown-dark);
@@ -141,20 +139,15 @@
 
     .search button {
       border: none;
-      background: var(--brown-light);
+      background: var(--brown);
       color: white;
-      padding: 0 24px;
+      padding: 0 23px;
       border-radius: 40px;
       cursor: pointer;
       font-size: 15px;
       font-weight: bold;
     }
 
-    .search button:hover {
-      background: var(--brown);
-    }
-
-    /* SECTIONS */
     .section {
       max-width: 1100px;
       margin: auto;
@@ -167,7 +160,6 @@
       color: var(--brown-dark);
     }
 
-    /* CATEGORIES */
     .category-list {
       display: flex;
       gap: 10px;
@@ -183,7 +175,7 @@
     .category {
       flex-shrink: 0;
       white-space: nowrap;
-      background: var(--white);
+      background: white;
       border: 1px solid var(--border);
       color: var(--brown-dark);
       padding: 11px 20px;
@@ -192,14 +184,13 @@
       transition: 0.2s;
     }
 
-    .category:hover,
-    .category.active {
+    .category.active,
+    .category:hover {
       background: var(--brown);
       color: white;
       border-color: var(--brown);
     }
 
-    /* PRODUCTS */
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -208,7 +199,7 @@
 
     .card {
       position: relative;
-      background: var(--white);
+      background: white;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 5px 18px rgba(70,51,41,0.08);
@@ -216,8 +207,7 @@
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(70,51,41,0.13);
+      transform: translateY(-4px);
     }
 
     .favorite {
@@ -228,8 +218,8 @@
       height: 38px;
       border: none;
       border-radius: 50%;
-      background: rgba(255,255,255,0.92);
-      font-size: 19px;
+      background: rgba(255,255,255,0.94);
+      font-size: 20px;
       cursor: pointer;
       z-index: 2;
     }
@@ -253,4 +243,505 @@
 
     .card h3 {
       font-size: 18px;
-      margin-bottom: 
+      margin-bottom: 7px;
+      color: var(--brown-dark);
+    }
+
+    .description {
+      color: var(--brown-light);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: 13px;
+    }
+
+    .buy {
+      width: 100%;
+      border: none;
+      padding: 11px;
+      border-radius: 10px;
+      background: var(--brown);
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .buy:hover {
+      background: var(--brown-dark);
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--brown-light);
+    }
+
+    footer {
+      margin-top: 40px;
+      background: var(--brown-dark);
+      color: white;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    footer strong {
+      font-size: 22px;
+    }
+
+    footer p {
+      margin-top: 8px;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 27px;
+      }
+
+      .hero {
+        padding: 42px 15px 30px;
+      }
+
+      .hero h1 {
+        font-size: 31px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .search input {
+        font-size: 14px;
+        padding-left: 14px;
+      }
+
+      .search button {
+        padding: 0 16px;
+      }
+
+      .section {
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .section-title {
+        font-size: 23px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-image {
+        height: 145px;
+        font-size: 50px;
+      }
+
+      .card-content {
+        padding: 12px;
+      }
+
+      .card h3 {
+        font-size: 16px;
+      }
+
+      .description {
+        font-size: 12px;
+      }
+
+      .price {
+        font-size: 17px;
+      }
+
+      .buy {
+        font-size: 13px;
+        padding: 10px 5px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .product-image {
+        height: 130px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="top">
+      <div class="logo">Sou9i</div>
+
+      <button class="menu" onclick="toggleMenu()">☰</button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div onclick="scrollToProducts()">🛍️ Produits</div>
+      <div onclick="scrollToCategories()">🏷️ Catégories</div>
+      <div onclick="showFavorites()">❤️ Favoris</div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h1>Bienvenue sur Sou9i</h1>
+      <p>Découvrez des produits présentés par leurs créateurs.</p>
+
+      <div class="search">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Rechercher un produit..."
+          oninput="searchProducts()"
+        >
+
+        <button onclick="searchProducts()">Rechercher</button>
+      </div>
+    </section>
+
+    <section class="section" id="categoriesSection">
+      <h2 class="section-title">Catégories</h2>
+
+      <div class="category-list">
+        <div class="category active" onclick="filterCategory('all', this)">
+          Tout
+        </div>
+
+        <div class="category" onclick="filterCategory('mode', this)">
+          Mode
+        </div>
+
+        <div class="category" onclick="filterCategory('beaute', this)">
+          Beauté
+        </div>
+
+        <div class="category" onclick="filterCategory('maison', this)">
+          Maison
+        </div>
+
+        <div class="category" onclick="filterCategory('tech', this)">
+          Technologie
+        </div>
+
+        <div class="category" onclick="filterCategory('autre', this)">
+          Autres
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="productsSection">
+
+      <h2 class="section-title">Produits</h2>
+
+      <div class="grid" id="productsGrid">
+
+        <div class="card" data-category="mode" data-name="Sac élégant">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">👜</div>
+
+          <div class="card-content">
+            <h3>Sac élégant</h3>
+            <p class="description">Sac moderne et élégant.</p>
+            <div class="price">89 DT</div>
+            <button class="buy" onclick="contactProduct('Sac élégant')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="beaute" data-name="Parfum">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">🌸</div>
+
+          <div class="card-content">
+            <h3>Parfum</h3>
+            <p class="description">Une fragrance douce et raffinée.</p>
+            <div class="price">65 DT</div>
+            <button class="buy" onclick="contactProduct('Parfum')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="maison" data-name="Décoration">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">🏺</div>
+
+          <div class="card-content">
+            <h3>Décoration</h3>
+            <p class="description">Une belle décoration pour votre maison.</p>
+            <div class="price">45 DT</div>
+            <button class="buy" onclick="contactProduct('Décoration')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="tech" data-name="Écouteurs">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">🎧</div>
+
+          <div class="card-content">
+            <h3>Écouteurs</h3>
+            <p class="description">Écouteurs sans fil pratiques.</p>
+            <div class="price">59 DT</div>
+            <button class="buy" onclick="contactProduct('Écouteurs')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="mode" data-name="Chaussures">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">👟</div>
+
+          <div class="card-content">
+            <h3>Chaussures</h3>
+            <p class="description">Chaussures confortables et modernes.</p>
+            <div class="price">120 DT</div>
+            <button class="buy" onclick="contactProduct('Chaussures')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="maison" data-name="Lampe">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">💡</div>
+
+          <div class="card-content">
+            <h3>Lampe</h3>
+            <p class="description">Lampe élégante pour votre intérieur.</p>
+            <div class="price">75 DT</div>
+            <button class="buy" onclick="contactProduct('Lampe')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="beaute" data-name="Crème">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">🧴</div>
+
+          <div class="card-content">
+            <h3>Crème</h3>
+            <p class="description">Soin quotidien pour la peau.</p>
+            <div class="price">32 DT</div>
+            <button class="buy" onclick="contactProduct('Crème')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+        <div class="card" data-category="autre" data-name="Produit artisanal">
+          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
+
+          <div class="product-image">🎁</div>
+
+          <div class="card-content">
+            <h3>Produit artisanal</h3>
+            <p class="description">Création originale et artisanale.</p>
+            <div class="price">40 DT</div>
+            <button class="buy" onclick="contactProduct('Produit artisanal')">
+              Voir le produit
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="empty" id="emptyMessage">
+        Aucun produit trouvé.
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    <strong>Sou9i</strong>
+    <p>Votre marketplace simple et moderne.</p>
+  </footer>
+
+
+  <script>
+
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("active");
+    }
+
+
+    function scrollToProducts() {
+      document.getElementById("productsSection")
+        .scrollIntoView({ behavior: "smooth" });
+
+      document.getElementById("mobileMenu")
+        .classList.remove("active");
+    }
+
+
+    function scrollToCategories() {
+      document.getElementById("categoriesSection")
+        .scrollIntoView({ behavior: "smooth" });
+
+      document.getElementById("mobileMenu")
+        .classList.remove("active");
+    }
+
+
+    function toggleFavorite(button) {
+      button.classList.toggle("active");
+
+      if (button.classList.contains("active")) {
+        button.textContent = "♥";
+      } else {
+        button.textContent = "♡";
+      }
+    }
+
+
+    function searchProducts() {
+
+      const search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+      const cards =
+        document.querySelectorAll(".card");
+
+      let found = 0;
+
+      cards.forEach(card => {
+
+        const name =
+          card.getAttribute("data-name")
+          .toLowerCase();
+
+        if (name.includes(search)) {
+          card.style.display = "";
+          found++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("emptyMessage").style.display =
+        found === 0 ? "block" : "none";
+    }
+
+
+    function filterCategory(category, element) {
+
+      const cards =
+        document.querySelectorAll(".card");
+
+      document.querySelectorAll(".category")
+        .forEach(button => {
+          button.classList.remove("active");
+        });
+
+      element.classList.add("active");
+
+      let found = 0;
+
+      cards.forEach(card => {
+
+        if (
+          category === "all" ||
+          card.getAttribute("data-category") === category
+        ) {
+          card.style.display = "";
+          found++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("emptyMessage").style.display =
+        found === 0 ? "block" : "none";
+    }
+
+
+    function showFavorites() {
+
+      const cards =
+        document.querySelectorAll(".card");
+
+      let found = 0;
+
+      cards.forEach(card => {
+
+        const favorite =
+          card.querySelector(".favorite");
+
+        if (favorite.classList.contains("active")) {
+          card.style.display = "";
+          found++;
+        } else {
+          card.style.display = "none";
+        }
+
+      });
+
+      document.getElementById("emptyMessage").style.display =
+        found === 0 ? "block" : "none";
+
+      document.getElementById("mobileMenu")
+        .classList.remove("active");
+
+      document.getElementById("productsSection")
+        .scrollIntoView({ behavior: "smooth" });
+    }
+
+
+    function contactProduct(productName) {
+
+      alert(
+        "Vous avez sélectionné : " +
+        productName +
+        "\n\nLa page du produit sera ajoutée prochainement."
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
