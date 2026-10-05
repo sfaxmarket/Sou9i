@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -32,7 +33,6 @@
       color: var(--brown-dark);
     }
 
-    /* HEADER */
     header {
       position: sticky;
       top: 0;
@@ -125,7 +125,6 @@
       justify-content: center;
     }
 
-    /* CATEGORIES */
     .categories {
       max-width: 1250px;
       margin: auto;
@@ -156,7 +155,6 @@
       color: white;
     }
 
-    /* HERO */
     .hero {
       max-width: 1250px;
       margin: 25px auto;
@@ -214,11 +212,15 @@
     }
 
     @keyframes floatWheel {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
+      0%, 100% {
+        transform: rotate(-5deg);
+      }
+
+      50% {
+        transform: rotate(5deg);
+      }
     }
 
-    /* SECTION */
     .section {
       max-width: 1250px;
       margin: 35px auto;
@@ -242,7 +244,6 @@
       text-decoration: none;
     }
 
-    /* PRODUCTS */
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -271,12 +272,6 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-    }
-
-    .product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
     }
 
     .placeholder {
@@ -363,7 +358,8 @@
       background: var(--brown-dark);
     }
 
-    /* WHEEL PROMOTION */
+    /* WHEEL */
+
     .wheel-section {
       max-width: 1250px;
       margin: 45px auto;
@@ -406,6 +402,11 @@
       font-weight: bold;
     }
 
+    .wheel-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     .wheel-container {
       position: relative;
       width: 230px;
@@ -417,6 +418,7 @@
       height: 230px;
       border-radius: 50%;
       border: 8px solid white;
+
       background: conic-gradient(
         #d7b892 0deg 60deg,
         #f0dfc9 60deg 120deg,
@@ -425,9 +427,14 @@
         #9e7e65 240deg 300deg,
         #f5e8d8 300deg 360deg
       );
+
       position: relative;
-      transition: transform 4s cubic-bezier(.17,.67,.12,.99);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+      transition:
+        transform 4s cubic-bezier(.17,.67,.12,.99);
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
     }
 
     .wheel-label {
@@ -443,12 +450,29 @@
       font-size: 15px;
     }
 
-    .label1 { transform: rotate(30deg) translateY(-82px); }
-    .label2 { transform: rotate(90deg) translateY(-82px); }
-    .label3 { transform: rotate(150deg) translateY(-82px); }
-    .label4 { transform: rotate(210deg) translateY(-82px); }
-    .label5 { transform: rotate(270deg) translateY(-82px); }
-    .label6 { transform: rotate(330deg) translateY(-82px); }
+    .label1 {
+      transform: rotate(30deg) translateY(-82px);
+    }
+
+    .label2 {
+      transform: rotate(90deg) translateY(-82px);
+    }
+
+    .label3 {
+      transform: rotate(150deg) translateY(-82px);
+    }
+
+    .label4 {
+      transform: rotate(210deg) translateY(-82px);
+    }
+
+    .label5 {
+      transform: rotate(270deg) translateY(-82px);
+    }
+
+    .label6 {
+      transform: rotate(330deg) translateY(-82px);
+    }
 
     .wheel-center {
       position: absolute;
@@ -477,6 +501,7 @@
     }
 
     /* MODAL */
+
     .modal {
       display: none;
       position: fixed;
@@ -530,7 +555,17 @@
       letter-spacing: 2px;
     }
 
-    /* FOOTER */
+    .try-again {
+      margin: 20px 0;
+      padding: 14px;
+      border: 2px dashed var(--red);
+      border-radius: 12px;
+      background: #f8e9e6;
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--red);
+    }
+
     footer {
       margin-top: 50px;
       background: var(--brown-dark);
@@ -570,8 +605,8 @@
       font-size: 13px;
     }
 
-    /* MOBILE */
     @media (max-width: 900px) {
+
       .grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -599,6 +634,7 @@
     }
 
     @media (max-width: 600px) {
+
       .topbar {
         flex-wrap: wrap;
       }
@@ -662,550 +698,1220 @@
 
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="topbar">
+<header>
 
-      <div class="logo">
-        Sou<span>9i</span>
-      </div>
+  <div class="topbar">
 
-      <div class="search">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Rechercher un produit..."
-          onkeyup="searchProducts()"
-        >
-        <button>🔎</button>
-      </div>
+    <div class="logo">
+      Sou<span>9i</span>
+    </div>
 
-      <div class="header-actions">
-        <button class="header-btn" title="Favoris">♡</button>
+    <div class="search">
 
-        <button class="header-btn" title="Panier">
-          🛒
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </div>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Rechercher un produit..."
+        onkeyup="searchProducts()"
+      >
+
+      <button>🔎</button>
 
     </div>
 
-    <div class="categories">
-      <button class="category active" onclick="filterCategory('all', this)">Tous</button>
-      <button class="category" onclick="filterCategory('mode', this)">Mode</button>
-      <button class="category" onclick="filterCategory('maison', this)">Maison</button>
-      <button class="category" onclick="filterCategory('beaute', this)">Beauté</button>
-      <button class="category" onclick="filterCategory('electronique', this)">Électronique</button>
-      <button class="category" onclick="filterCategory('accessoires', this)">Accessoires</button>
-      <button class="category" onclick="filterCategory('autres', this)">Autres</button>
-    </div>
-  </header>
+    <div class="header-actions">
 
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <div class="hero-text">
-      <small>Bienvenue sur Sou9i</small>
-
-      <h1>Découvrez les produits qui vous intéressent</h1>
-
-      <p>
-        Trouvez facilement les produits annoncés sur Sou9i
-        et découvrez les meilleures offres.
-      </p>
-
-      <button class="hero-button" onclick="document.getElementById('products').scrollIntoView()">
-        Découvrir les produits
+      <button class="header-btn" title="Favoris">
+        ♡
       </button>
-    </div>
 
-    <div class="hero-wheel">
-      🎡
-    </div>
+      <button class="header-btn" title="Panier">
 
-  </section>
+        🛒
 
+        <span
+          class="cart-count"
+          id="cartCount"
+        >
+          0
+        </span>
 
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-
-    <div class="section-title">
-      <h2>Produits populaires</h2>
-      <a href="#">Voir tout</a>
-    </div>
-
-    <div class="grid" id="productGrid">
-
-      <!-- PRODUCT 1 -->
-      <div class="card product" data-category="mode" data-name="T-shirt élégant">
-
-        <div class="product-image">
-          <div class="placeholder">👕</div>
-        </div>
-
-        <span class="discount">-20%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>T-shirt élégant</h3>
-          <p>Mode</p>
-
-          <div class="price">
-            <span class="new-price">40 DT</span>
-            <span class="old-price">50 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 2 -->
-      <div class="card product" data-category="accessoires" data-name="Sac élégant">
-
-        <div class="product-image">
-          <div class="placeholder">👜</div>
-        </div>
-
-        <span class="discount">-15%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Sac élégant</h3>
-          <p>Accessoires</p>
-
-          <div class="price">
-            <span class="new-price">85 DT</span>
-            <span class="old-price">100 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 3 -->
-      <div class="card product" data-category="beaute" data-name="Parfum">
-
-        <div class="product-image">
-          <div class="placeholder">🌸</div>
-        </div>
-
-        <span class="discount">-25%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Parfum élégant</h3>
-          <p>Beauté</p>
-
-          <div class="price">
-            <span class="new-price">60 DT</span>
-            <span class="old-price">80 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 4 -->
-      <div class="card product" data-category="electronique" data-name="Écouteurs">
-
-        <div class="product-image">
-          <div class="placeholder">🎧</div>
-        </div>
-
-        <span class="discount">-10%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Écouteurs Bluetooth</h3>
-          <p>Électronique</p>
-
-          <div class="price">
-            <span class="new-price">90 DT</span>
-            <span class="old-price">100 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 5 -->
-      <div class="card product" data-category="maison" data-name="Lampe moderne">
-
-        <div class="product-image">
-          <div class="placeholder">💡</div>
-        </div>
-
-        <span class="discount">-20%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Lampe moderne</h3>
-          <p>Maison</p>
-
-          <div class="price">
-            <span class="new-price">48 DT</span>
-            <span class="old-price">60 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 6 -->
-      <div class="card product" data-category="mode" data-name="Chaussures">
-
-        <div class="product-image">
-          <div class="placeholder">👟</div>
-        </div>
-
-        <span class="discount">-30%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Chaussures</h3>
-          <p>Mode</p>
-
-          <div class="price">
-            <span class="new-price">70 DT</span>
-            <span class="old-price">100 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 7 -->
-      <div class="card product" data-category="maison" data-name="Décoration">
-
-        <div class="product-image">
-          <div class="placeholder">🏠</div>
-        </div>
-
-        <span class="discount">-15%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Décoration maison</h3>
-          <p>Maison</p>
-
-          <div class="price">
-            <span class="new-price">55 DT</span>
-            <span class="old-price">65 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 8 -->
-      <div class="card product" data-category="autres" data-name="Produit spécial">
-
-        <div class="product-image">
-          <div class="placeholder">🎁</div>
-        </div>
-
-        <span class="discount">-10%</span>
-
-        <button class="favorite" onclick="favorite(this)">♡</button>
-
-        <div class="card-info">
-          <h3>Produit spécial</h3>
-          <p>Autres</p>
-
-          <div class="price">
-            <span class="new-price">45 DT</span>
-            <span class="old-price">50 DT</span>
-          </div>
-
-          <button class="add-cart" onclick="addToCart()">
-            Ajouter au panier
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- DISCOUNT WHEEL -->
-  <section class="wheel-section">
-
-    <div class="wheel-box">
-
-      <div class="wheel-info">
-        <h2>🎡 Tournez la roue !</h2>
-
-        <p>
-          Tentez votre chance et gagnez un code
-          de réduction utilisable sur votre prochain achat
-          sur Sou9i.
-        </p>
-
-        <button class="wheel-button" onclick="openWheel()">
-          Tourner la roue
-        </button>
-      </div>
-
-
-      <div class="wheel-container">
-
-        <div class="pointer"></div>
-
-        <div class="wheel" id="wheel">
-
-          <div class="wheel-label label1">5%</div>
-          <div class="wheel-label label2">10%</div>
-          <div class="wheel-label label3">15%</div>
-          <div class="wheel-label label4">20%</div>
-          <div class="wheel-label label5">25%</div>
-          <div class="wheel-label label6">🎁</div>
-
-          <div class="wheel-center"></div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- MODAL -->
-  <div class="modal" id="wheelModal">
-
-    <div class="modal-content">
-
-      <button class="close" onclick="closeModal()">×</button>
-
-      <div class="modal-wheel">🎡</div>
-
-      <h2>Félicitations ! 🎉</h2>
-
-      <p>Vous avez gagné :</p>
-
-      <div class="coupon" id="couponResult">
-        SOU9I10
-      </div>
-
-      <p>
-        Utilisez ce code lors de votre prochain achat.
-      </p>
+      </button>
 
     </div>
 
   </div>
 
 
-  <!-- FOOTER -->
-  <footer>
+  <div class="categories">
 
-    <div class="footer-inner">
+    <button
+      class="category active"
+      onclick="filterCategory('all', this)"
+    >
+      Tous
+    </button>
 
-      <div>
-        <h3>Sou9i</h3>
+    <button
+      class="category"
+      onclick="filterCategory('mode', this)"
+    >
+      Mode
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('maison', this)"
+    >
+      Maison
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('beaute', this)"
+    >
+      Beauté
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('electronique', this)"
+    >
+      Électronique
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('accessoires', this)"
+    >
+      Accessoires
+    </button>
+
+    <button
+      class="category"
+      onclick="filterCategory('autres', this)"
+    >
+      Autres
+    </button>
+
+  </div>
+
+</header>
+
+
+<section class="hero">
+
+  <div class="hero-text">
+
+    <small>
+      Bienvenue sur Sou9i
+    </small>
+
+    <h1>
+      Découvrez les produits qui vous intéressent
+    </h1>
+
+    <p>
+      Trouvez facilement les produits annoncés sur Sou9i
+      et découvrez les meilleures offres.
+    </p>
+
+    <button
+      class="hero-button"
+      onclick="document.getElementById('products').scrollIntoView()"
+    >
+      Découvrir les produits
+    </button>
+
+  </div>
+
+  <div class="hero-wheel">
+    🎡
+  </div>
+
+</section>
+
+
+<section
+  class="section"
+  id="products"
+>
+
+  <div class="section-title">
+
+    <h2>
+      Produits populaires
+    </h2>
+
+    <a href="#">
+      Voir tout
+    </a>
+
+  </div>
+
+
+  <div
+    class="grid"
+    id="productGrid"
+  >
+
+    <div
+      class="card product"
+      data-category="mode"
+      data-name="T-shirt élégant"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          👕
+        </div>
+      </div>
+
+      <span class="discount">
+        -20%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          T-shirt élégant
+        </h3>
+
         <p>
-          Votre marketplace pour découvrir facilement
-          les produits annoncés et les meilleures offres.
+          Mode
         </p>
-      </div>
 
-      <div>
-        <h3>Navigation</h3>
-        <ul>
-          <li>Accueil</li>
-          <li>Produits</li>
-          <li>Catégories</li>
-          <li>Promotions</li>
-        </ul>
-      </div>
+        <div class="price">
 
-      <div>
-        <h3>Contact</h3>
-        <ul>
-          <li>📧 Contactez-nous</li>
-          <li>📱 Sou9i</li>
-          <li>🇹🇳 Tunisie</li>
-        </ul>
+          <span class="new-price">
+            40 DT
+          </span>
+
+          <span class="old-price">
+            50 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
       </div>
 
     </div>
 
-    <div class="copyright">
-      © 2026 Sou9i - Tous droits réservés.
+
+    <div
+      class="card product"
+      data-category="accessoires"
+      data-name="Sac élégant"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          👜
+        </div>
+      </div>
+
+      <span class="discount">
+        -15%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Sac élégant
+        </h3>
+
+        <p>
+          Accessoires
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            85 DT
+          </span>
+
+          <span class="old-price">
+            100 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
     </div>
 
-  </footer>
+
+    <div
+      class="card product"
+      data-category="beaute"
+      data-name="Parfum"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          🌸
+        </div>
+      </div>
+
+      <span class="discount">
+        -25%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Parfum élégant
+        </h3>
+
+        <p>
+          Beauté
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            60 DT
+          </span>
+
+          <span class="old-price">
+            80 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
 
 
-  <script>
+    <div
+      class="card product"
+      data-category="electronique"
+      data-name="Écouteurs"
+    >
 
-    /* CART */
-    let cartCount = 0;
+      <div class="product-image">
+        <div class="placeholder">
+          🎧
+        </div>
+      </div>
 
-    function addToCart() {
-      cartCount++;
-      document.getElementById("cartCount").textContent = cartCount;
+      <span class="discount">
+        -10%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Écouteurs Bluetooth
+        </h3>
+
+        <p>
+          Électronique
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            90 DT
+          </span>
+
+          <span class="old-price">
+            100 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="card product"
+      data-category="maison"
+      data-name="Lampe moderne"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          💡
+        </div>
+      </div>
+
+      <span class="discount">
+        -20%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Lampe moderne
+        </h3>
+
+        <p>
+          Maison
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            48 DT
+          </span>
+
+          <span class="old-price">
+            60 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="card product"
+      data-category="mode"
+      data-name="Chaussures"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          👟
+        </div>
+      </div>
+
+      <span class="discount">
+        -30%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Chaussures
+        </h3>
+
+        <p>
+          Mode
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            70 DT
+          </span>
+
+          <span class="old-price">
+            100 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="card product"
+      data-category="maison"
+      data-name="Décoration"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          🏠
+        </div>
+      </div>
+
+      <span class="discount">
+        -15%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Décoration maison
+        </h3>
+
+        <p>
+          Maison
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            55 DT
+          </span>
+
+          <span class="old-price">
+            65 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="card product"
+      data-category="autres"
+      data-name="Produit spécial"
+    >
+
+      <div class="product-image">
+        <div class="placeholder">
+          🎁
+        </div>
+      </div>
+
+      <span class="discount">
+        -10%
+      </span>
+
+      <button
+        class="favorite"
+        onclick="favorite(this)"
+      >
+        ♡
+      </button>
+
+      <div class="card-info">
+
+        <h3>
+          Produit spécial
+        </h3>
+
+        <p>
+          Autres
+        </p>
+
+        <div class="price">
+
+          <span class="new-price">
+            45 DT
+          </span>
+
+          <span class="old-price">
+            50 DT
+          </span>
+
+        </div>
+
+        <button
+          class="add-cart"
+          onclick="addToCart()"
+        >
+          Ajouter au panier
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="wheel-section">
+
+  <div class="wheel-box">
+
+    <div class="wheel-info">
+
+      <h2>
+        🎡 Tournez la roue !
+      </h2>
+
+      <p>
+        Tentez votre chance et gagnez un code
+        de réduction utilisable sur votre prochain achat
+        sur Sou9i.
+      </p>
+
+      <button
+        class="wheel-button"
+        id="wheelButton"
+        onclick="openWheel()"
+      >
+        Tourner la roue
+      </button>
+
+    </div>
+
+
+    <div class="wheel-container">
+
+      <div class="pointer"></div>
+
+      <div
+        class="wheel"
+        id="wheel"
+      >
+
+        <div class="wheel-label label1">
+          5%
+        </div>
+
+        <div class="wheel-label label2">
+          10%
+        </div>
+
+        <div class="wheel-label label3">
+          15%
+        </div>
+
+        <div class="wheel-label label4">
+          20%
+        </div>
+
+        <div class="wheel-label label5">
+          25%
+        </div>
+
+        <div class="wheel-label label6">
+          🔄
+        </div>
+
+        <div class="wheel-center"></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<div
+  class="modal"
+  id="wheelModal"
+>
+
+  <div class="modal-content">
+
+    <button
+      class="close"
+      onclick="closeModal()"
+    >
+      ×
+    </button>
+
+    <div class="modal-wheel">
+      🎡
+    </div>
+
+    <h2 id="resultTitle">
+      Félicitations ! 🎉
+    </h2>
+
+    <p id="resultText">
+      Vous avez gagné :
+    </p>
+
+    <div
+      class="coupon"
+      id="couponResult"
+    >
+      SOU9I10
+    </div>
+
+    <p id="resultDescription">
+      Utilisez ce code lors de votre prochain achat.
+    </p>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+
+      <h3>
+        Sou9i
+      </h3>
+
+      <p>
+        Votre marketplace pour découvrir facilement
+        les produits annoncés et les meilleures offres.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        Navigation
+      </h3>
+
+      <ul>
+
+        <li>
+          Accueil
+        </li>
+
+        <li>
+          Produits
+        </li>
+
+        <li>
+          Catégories
+        </li>
+
+        <li>
+          Promotions
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        Contact
+      </h3>
+
+      <ul>
+
+        <li>
+          📧 Contactez-nous
+        </li>
+
+        <li>
+          📱 Sou9i
+        </li>
+
+        <li>
+          🇹🇳 Tunisie
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+
+  <div class="copyright">
+    © 2026 Sou9i - Tous droits réservés.
+  </div>
+
+</footer>
+
+
+<script>
+
+  /* =========================
+     CART
+  ========================= */
+
+  let cartCount = 0;
+
+  function addToCart() {
+
+    cartCount++;
+
+    document.getElementById("cartCount").textContent =
+      cartCount;
+
+  }
+
+
+  /* =========================
+     FAVORITES
+  ========================= */
+
+  function favorite(button) {
+
+    button.classList.toggle("active");
+
+    if (button.classList.contains("active")) {
+
+      button.textContent = "♥";
+
+    } else {
+
+      button.textContent = "♡";
+
     }
 
+  }
 
-    /* FAVORITES */
-    function favorite(button) {
-      button.classList.toggle("active");
 
-      if (button.classList.contains("active")) {
-        button.textContent = "♥";
+  /* =========================
+     CATEGORY FILTER
+  ========================= */
+
+  function filterCategory(category, button) {
+
+    document.querySelectorAll(".category").forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    document.querySelectorAll(".product").forEach(product => {
+
+      if (
+        category === "all" ||
+        product.dataset.category === category
+      ) {
+
+        product.style.display = "block";
+
       } else {
-        button.textContent = "♡";
-      }
-    }
 
+        product.style.display = "none";
 
-    /* CATEGORY FILTER */
-    function filterCategory(category, button) {
-
-      document.querySelectorAll(".category").forEach(btn => {
-        btn.classList.remove("active");
-      });
-
-      button.classList.add("active");
-
-      document.querySelectorAll(".product").forEach(product => {
-
-        if (
-          category === "all" ||
-          product.dataset.category === category
-        ) {
-          product.style.display = "block";
-        } else {
-          product.style.display = "none";
-        }
-
-      });
-    }
-
-
-    /* SEARCH */
-    function searchProducts() {
-
-      const search =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase();
-
-      document.querySelectorAll(".product").forEach(product => {
-
-        const name =
-          product.dataset.name.toLowerCase();
-
-        if (name.includes(search)) {
-          product.style.display = "block";
-        } else {
-          product.style.display = "none";
-        }
-
-      });
-    }
-
-
-    /* DISCOUNT WHEEL */
-    let wheelRotation = 0;
-
-    function openWheel() {
-
-      const wheel = document.getElementById("wheel");
-
-      const randomSpin =
-        1800 + Math.floor(Math.random() * 1800);
-
-      wheelRotation += randomSpin;
-
-      wheel.style.transform =
-        "rotate(" + wheelRotation + "deg)";
-
-      setTimeout(() => {
-
-        const prizes = [
-          "5%",
-          "10%",
-          "15%",
-          "20%",
-          "25%",
-          "🎁"
-        ];
-
-        const prize =
-          prizes[Math.floor(Math.random() * prizes.length)];
-
-        let code;
-
-        if (prize === "🎁") {
-          code = "SOU9I-GIFT";
-        } else {
-          code = "SOU9I" + prize.replace("%", "");
-        }
-
-        document.getElementById("couponResult").textContent = code;
-
-        document.getElementById("wheelModal").style.display = "flex";
-
-      }, 4200);
-    }
-
-
-    function closeModal() {
-      document.getElementById("wheelModal").style.display = "none";
-    }
-
-
-    /* CLOSE MODAL WHEN CLICKING OUTSIDE */
-    document.getElementById("wheelModal").addEventListener("click", function(e) {
-
-      if (e.target === this) {
-        closeModal();
       }
 
     });
 
-  </script>
+  }
+
+
+  /* =========================
+     SEARCH
+  ========================= */
+
+  function searchProducts() {
+
+    const search =
+      document.getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+    document.querySelectorAll(".product").forEach(product => {
+
+      const name =
+        product.dataset.name.toLowerCase();
+
+      if (name.includes(search)) {
+
+        product.style.display = "block";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+  }
+
+
+  /* =========================
+     WHEEL - ONCE PER DAY
+  ========================= */
+
+  let wheelRotation = 0;
+  let wheelSpinning = false;
+
+
+  function getToday() {
+
+    const today = new Date();
+
+    return today.getFullYear() +
+      "-" +
+      String(today.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(today.getDate()).padStart(2, "0");
+
+  }
+
+
+  function alreadyPlayedToday() {
+
+    const lastPlay =
+      localStorage.getItem("sou9iWheelDate");
+
+    return lastPlay === getToday();
+
+  }
+
+
+  function openWheel() {
+
+    if (wheelSpinning) {
+      return;
+    }
+
+
+    /* CHECK IF USER ALREADY PLAYED TODAY */
+
+    if (alreadyPlayedToday()) {
+
+      showAlreadyPlayed();
+
+      return;
+
+    }
+
+
+    wheelSpinning = true;
+
+
+    const button =
+      document.getElementById("wheelButton");
+
+    button.disabled = true;
+
+    button.textContent =
+      "La roue tourne...";
+
+
+    /*
+      النتائج:
+
+      5%  = 35%
+      10% = 35%
+      محاولة أخرى = 20%
+      15% = 5%
+      20% = 3%
+      25% = 2%
+
+      المجموع = 100%
+    */
+
+    const random =
+      Math.random() * 100;
+
+    let prize;
+
+
+    if (random < 35) {
+
+      prize = "5%";
+
+    }
+
+    else if (random < 70) {
+
+      prize = "10%";
+
+    }
+
+    else if (random < 90) {
+
+      prize = "TRY";
+
+    }
+
+    else if (random < 95) {
+
+      prize = "15%";
+
+    }
+
+    else if (random < 98) {
+
+      prize = "20%";
+
+    }
+
+    else {
+
+      prize = "25%";
+
+    }
+
+
+    /*
+      ندور العجلة عدة دورات
+      ثم نعرض النتيجة.
+    */
+
+    const randomSpin =
+      1800 +
+      Math.floor(Math.random() * 1800);
+
+    wheelRotation += randomSpin;
+
+
+    document.getElementById("wheel").style.transform =
+      "rotate(" + wheelRotation + "deg)";
+
+
+    setTimeout(function() {
+
+      /* حفظ اللعب لليوم الحالي */
+
+      localStorage.setItem(
+        "sou9iWheelDate",
+        getToday()
+      );
+
+
+      wheelSpinning = false;
+
+      button.disabled = true;
+
+      button.textContent =
+        "Vous avez déjà joué aujourd'hui";
+
+
+      showResult(prize);
+
+    }, 4200);
+
+  }
+
+
+  /* =========================
+     SHOW RESULT
+  ========================= */
+
+  function showResult(prize) {
+
+    const title =
+      document.getElementById("resultTitle");
+
+    const text =
+      document.getElementById("resultText");
+
+    const coupon =
+      document.getElementById("couponResult");
+
+    const description =
+      document.getElementById("resultDescription");
+
+
+    if (prize === "TRY") {
+
+      title.textContent =
+        "Dommage 😔";
+
+      text.textContent =
+        "Cette fois, vous n'avez pas gagné de réduction.";
+
+      coupon.className =
+        "try-again";
+
+      coupon.textContent =
+        "ESSAYEZ ENCORE DEMAIN";
+
+      description.textContent =
+        "Vous pourrez tourner la roue à nouveau demain.";
+
+    }
+
+    else {
+
+      title.textContent =
+        "Félicitations ! 🎉";
+
+      text.textContent =
+        "Vous avez gagné :";
+
+      coupon.className =
+        "coupon";
+
+      coupon.textContent =
+        "SOU9I" + prize.replace("%", "");
+
+      description.textContent =
+        "Utilisez ce code lors de votre prochain achat.";
+
+    }
+
+
+    document.getElementById("wheelModal").style.display =
+      "flex";
+
+  }
+
+
+  /* =========================
+     ALREADY PLAYED
+  ========================= */
+
+  function showAlreadyPlayed() {
+
+    document.getElementById("resultTitle").textContent =
+      "À demain 👋";
+
+    document.getElementById("resultText").textContent =
+      "Vous avez déjà tourné la roue aujourd'hui.";
+
+    const coupon =
+      document.getElementById("couponResult");
+
+    coupon.className =
+      "try-again";
+
+    coupon.textContent =
+      "1 TOUR PAR JOUR";
+
+    document.getElementById("resultDescription").textContent =
+      "Revenez demain pour tenter votre chance.";
+
+    document.getElementById("wheelModal").style.display =
+      "flex";
+
+  }
+
+
+  /* =========================
+     CLOSE MODAL
+  ========================= */
+
+  function closeModal() {
+
+    document.getElementById("wheelModal").style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     CLOSE MODAL OUTSIDE
+  ========================= */
+
+  document
+    .getElementById("wheelModal")
+    .addEventListener("click", function(e) {
+
+      if (e.target === this) {
+
+        closeModal();
+
+      }
+
+    });
+
+
+  /* =========================
+     CHECK WHEEL ON PAGE LOAD
+  ========================= */
+
+  window.addEventListener("load", function() {
+
+    if (alreadyPlayedToday()) {
+
+      document.getElementById("wheelButton").disabled =
+        true;
+
+      document.getElementById("wheelButton").textContent =
+        "Vous avez déjà joué aujourd'hui";
+
+    }
+
+  });
+
+</script>
 
 </body>
 </html>
+```
