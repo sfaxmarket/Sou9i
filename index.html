@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -301,6 +300,157 @@
       font-size: 14px;
     }
 
+
+    /* ==============================
+       ROUE DE CHANCE
+       ============================== */
+
+    .wheel-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(40, 27, 20, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 15px;
+    }
+
+    .wheel-overlay.show {
+      display: flex;
+    }
+
+    .wheel-box {
+      width: 100%;
+      max-width: 430px;
+      background: #fffaf5;
+      border-radius: 25px;
+      padding: 25px 18px 22px;
+      text-align: center;
+      box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+      position: relative;
+      animation: popup 0.35s ease;
+    }
+
+    @keyframes popup {
+      from {
+        transform: scale(0.75);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .wheel-close {
+      position: absolute;
+      top: 10px;
+      right: 13px;
+      width: 35px;
+      height: 35px;
+      border: none;
+      border-radius: 50%;
+      background: #eee0d1;
+      color: var(--brown-dark);
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .wheel-box h2 {
+      color: var(--brown-dark);
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    .wheel-box p {
+      color: var(--brown-light);
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .wheel-container {
+      width: 290px;
+      height: 290px;
+      max-width: 85vw;
+      max-height: 85vw;
+      margin: 5px auto 20px;
+      position: relative;
+    }
+
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      box-shadow: 0 5px 20px rgba(70,51,41,0.18);
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 34px solid #463329;
+      z-index: 3;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.25));
+    }
+
+    .wheel-center {
+      position: absolute;
+      width: 54px;
+      height: 54px;
+      background: white;
+      border: 7px solid #604638;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .spin-button {
+      border: none;
+      background: var(--brown);
+      color: white;
+      padding: 13px 35px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(70,51,41,0.2);
+    }
+
+    .spin-button:hover {
+      background: var(--brown-dark);
+    }
+
+    .spin-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .wheel-result {
+      display: none;
+      margin-top: 15px;
+      padding: 13px;
+      background: #efe3d3;
+      border-radius: 14px;
+      color: var(--brown-dark);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .wheel-result.show {
+      display: block;
+    }
+
+
     @media (max-width: 900px) {
       .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -308,6 +458,7 @@
     }
 
     @media (max-width: 600px) {
+
       .logo {
         font-size: 27px;
       }
@@ -376,9 +527,23 @@
         font-size: 13px;
         padding: 10px 5px;
       }
+
+      .wheel-box {
+        padding: 23px 12px 20px;
+      }
+
+      .wheel-box h2 {
+        font-size: 22px;
+      }
+
+      .wheel-container {
+        width: 270px;
+        height: 270px;
+      }
     }
 
     @media (max-width: 390px) {
+
       .grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -386,7 +551,13 @@
       .product-image {
         height: 130px;
       }
+
+      .wheel-container {
+        width: 245px;
+        height: 245px;
+      }
     }
+
   </style>
 </head>
 
@@ -406,13 +577,60 @@
     </div>
   </header>
 
+
+  <!-- ==============================
+       ROUE DE CHANCE
+       ============================== -->
+
+  <div class="wheel-overlay" id="wheelOverlay">
+
+    <div class="wheel-box">
+
+      <button class="wheel-close" onclick="closeWheel()">×</button>
+
+      <h2>🎁 Tentez votre chance !</h2>
+
+      <p>
+        Faites tourner la roue et gagnez peut-être une réduction.
+      </p>
+
+      <div class="wheel-container">
+
+        <div class="wheel-pointer"></div>
+
+        <canvas id="wheelCanvas" width="600" height="600"></canvas>
+
+        <div class="wheel-center"></div>
+
+      </div>
+
+      <button
+        class="spin-button"
+        id="spinButton"
+        onclick="spinWheel()"
+      >
+        🎯 TOURNEZ LA ROUE
+      </button>
+
+      <div class="wheel-result" id="wheelResult"></div>
+
+    </div>
+
+  </div>
+
+
   <main>
 
     <section class="hero">
+
       <h1>Bienvenue sur Sou9i</h1>
-      <p>Découvrez des produits présentés par leurs créateurs.</p>
+
+      <p>
+        Découvrez des produits présentés par leurs créateurs.
+      </p>
 
       <div class="search">
+
         <input
           type="text"
           id="searchInput"
@@ -420,169 +638,413 @@
           oninput="searchProducts()"
         >
 
-        <button onclick="searchProducts()">Rechercher</button>
+        <button onclick="searchProducts()">
+          Rechercher
+        </button>
+
       </div>
+
     </section>
 
+
     <section class="section" id="categoriesSection">
-      <h2 class="section-title">Catégories</h2>
+
+      <h2 class="section-title">
+        Catégories
+      </h2>
 
       <div class="category-list">
-        <div class="category active" onclick="filterCategory('all', this)">
+
+        <div
+          class="category active"
+          onclick="filterCategory('all', this)"
+        >
           Tout
         </div>
 
-        <div class="category" onclick="filterCategory('mode', this)">
+        <div
+          class="category"
+          onclick="filterCategory('mode', this)"
+        >
           Mode
         </div>
 
-        <div class="category" onclick="filterCategory('beaute', this)">
+        <div
+          class="category"
+          onclick="filterCategory('beaute', this)"
+        >
           Beauté
         </div>
 
-        <div class="category" onclick="filterCategory('maison', this)">
+        <div
+          class="category"
+          onclick="filterCategory('maison', this)"
+        >
           Maison
         </div>
 
-        <div class="category" onclick="filterCategory('tech', this)">
+        <div
+          class="category"
+          onclick="filterCategory('tech', this)"
+        >
           Technologie
         </div>
 
-        <div class="category" onclick="filterCategory('autre', this)">
+        <div
+          class="category"
+          onclick="filterCategory('autre', this)"
+        >
           Autres
         </div>
+
       </div>
+
     </section>
+
 
     <section class="section" id="productsSection">
 
-      <h2 class="section-title">Produits</h2>
+      <h2 class="section-title">
+        Produits
+      </h2>
 
       <div class="grid" id="productsGrid">
 
-        <div class="card" data-category="mode" data-name="Sac élégant">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">👜</div>
+        <div
+          class="card"
+          data-category="mode"
+          data-name="Sac élégant"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            👜
+          </div>
 
           <div class="card-content">
+
             <h3>Sac élégant</h3>
-            <p class="description">Sac moderne et élégant.</p>
-            <div class="price">89 DT</div>
-            <button class="buy" onclick="contactProduct('Sac élégant')">
+
+            <p class="description">
+              Sac moderne et élégant.
+            </p>
+
+            <div class="price">
+              89 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Sac élégant')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="beaute" data-name="Parfum">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">🌸</div>
+        <div
+          class="card"
+          data-category="beaute"
+          data-name="Parfum"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            🌸
+          </div>
 
           <div class="card-content">
+
             <h3>Parfum</h3>
-            <p class="description">Une fragrance douce et raffinée.</p>
-            <div class="price">65 DT</div>
-            <button class="buy" onclick="contactProduct('Parfum')">
+
+            <p class="description">
+              Une fragrance douce et raffinée.
+            </p>
+
+            <div class="price">
+              65 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Parfum')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="maison" data-name="Décoration">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">🏺</div>
+        <div
+          class="card"
+          data-category="maison"
+          data-name="Décoration"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            🏺
+          </div>
 
           <div class="card-content">
+
             <h3>Décoration</h3>
-            <p class="description">Une belle décoration pour votre maison.</p>
-            <div class="price">45 DT</div>
-            <button class="buy" onclick="contactProduct('Décoration')">
+
+            <p class="description">
+              Une belle décoration pour votre maison.
+            </p>
+
+            <div class="price">
+              45 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Décoration')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="tech" data-name="Écouteurs">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">🎧</div>
+        <div
+          class="card"
+          data-category="tech"
+          data-name="Écouteurs"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            🎧
+          </div>
 
           <div class="card-content">
+
             <h3>Écouteurs</h3>
-            <p class="description">Écouteurs sans fil pratiques.</p>
-            <div class="price">59 DT</div>
-            <button class="buy" onclick="contactProduct('Écouteurs')">
+
+            <p class="description">
+              Écouteurs sans fil pratiques.
+            </p>
+
+            <div class="price">
+              59 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Écouteurs')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="mode" data-name="Chaussures">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">👟</div>
+        <div
+          class="card"
+          data-category="mode"
+          data-name="Chaussures"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            👟
+          </div>
 
           <div class="card-content">
+
             <h3>Chaussures</h3>
-            <p class="description">Chaussures confortables et modernes.</p>
-            <div class="price">120 DT</div>
-            <button class="buy" onclick="contactProduct('Chaussures')">
+
+            <p class="description">
+              Chaussures confortables et modernes.
+            </p>
+
+            <div class="price">
+              120 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Chaussures')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="maison" data-name="Lampe">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">💡</div>
+        <div
+          class="card"
+          data-category="maison"
+          data-name="Lampe"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            💡
+          </div>
 
           <div class="card-content">
+
             <h3>Lampe</h3>
-            <p class="description">Lampe élégante pour votre intérieur.</p>
-            <div class="price">75 DT</div>
-            <button class="buy" onclick="contactProduct('Lampe')">
+
+            <p class="description">
+              Lampe élégante pour votre intérieur.
+            </p>
+
+            <div class="price">
+              75 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Lampe')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="beaute" data-name="Crème">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">🧴</div>
+        <div
+          class="card"
+          data-category="beaute"
+          data-name="Crème"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            🧴
+          </div>
 
           <div class="card-content">
+
             <h3>Crème</h3>
-            <p class="description">Soin quotidien pour la peau.</p>
-            <div class="price">32 DT</div>
-            <button class="buy" onclick="contactProduct('Crème')">
+
+            <p class="description">
+              Soin quotidien pour la peau.
+            </p>
+
+            <div class="price">
+              32 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Crème')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
 
-        <div class="card" data-category="autre" data-name="Produit artisanal">
-          <button class="favorite" onclick="toggleFavorite(this)">♡</button>
 
-          <div class="product-image">🎁</div>
+        <div
+          class="card"
+          data-category="autre"
+          data-name="Produit artisanal"
+        >
+
+          <button
+            class="favorite"
+            onclick="toggleFavorite(this)"
+          >
+            ♡
+          </button>
+
+          <div class="product-image">
+            🎁
+          </div>
 
           <div class="card-content">
+
             <h3>Produit artisanal</h3>
-            <p class="description">Création originale et artisanale.</p>
-            <div class="price">40 DT</div>
-            <button class="buy" onclick="contactProduct('Produit artisanal')">
+
+            <p class="description">
+              Création originale et artisanale.
+            </p>
+
+            <div class="price">
+              40 DT
+            </div>
+
+            <button
+              class="buy"
+              onclick="contactProduct('Produit artisanal')"
+            >
               Voir le produit
             </button>
+
           </div>
+
         </div>
+
 
       </div>
 
-      <div class="empty" id="emptyMessage">
+      <div
+        class="empty"
+        id="emptyMessage"
+      >
         Aucun produit trouvé.
       </div>
 
@@ -590,56 +1052,100 @@
 
   </main>
 
+
   <footer>
+
     <strong>Sou9i</strong>
-    <p>Votre marketplace simple et moderne.</p>
+
+    <p>
+      Votre marketplace simple et moderne.
+    </p>
+
   </footer>
 
 
   <script>
 
+
+    /* ==============================
+       MENU
+       ============================== */
+
     function toggleMenu() {
-      const menu = document.getElementById("mobileMenu");
+
+      const menu =
+        document.getElementById("mobileMenu");
+
       menu.classList.toggle("active");
+
     }
 
 
     function scrollToProducts() {
-      document.getElementById("productsSection")
-        .scrollIntoView({ behavior: "smooth" });
 
-      document.getElementById("mobileMenu")
+      document
+        .getElementById("productsSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+      document
+        .getElementById("mobileMenu")
         .classList.remove("active");
+
     }
 
 
     function scrollToCategories() {
-      document.getElementById("categoriesSection")
-        .scrollIntoView({ behavior: "smooth" });
 
-      document.getElementById("mobileMenu")
+      document
+        .getElementById("categoriesSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
+      document
+        .getElementById("mobileMenu")
         .classList.remove("active");
+
     }
 
+
+    /* ==============================
+       FAVORIS
+       ============================== */
 
     function toggleFavorite(button) {
+
       button.classList.toggle("active");
 
-      if (button.classList.contains("active")) {
+      if (
+        button.classList.contains("active")
+      ) {
+
         button.textContent = "♥";
+
       } else {
+
         button.textContent = "♡";
+
       }
+
     }
 
+
+    /* ==============================
+       RECHERCHE
+       ============================== */
 
     function searchProducts() {
 
       const search =
-        document.getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase()
+          .trim();
 
       const cards =
         document.querySelectorAll(".card");
@@ -649,31 +1155,51 @@
       cards.forEach(card => {
 
         const name =
-          card.getAttribute("data-name")
-          .toLowerCase();
+          card
+            .getAttribute("data-name")
+            .toLowerCase();
 
         if (name.includes(search)) {
+
           card.style.display = "";
           found++;
+
         } else {
+
           card.style.display = "none";
+
         }
 
       });
 
-      document.getElementById("emptyMessage").style.display =
-        found === 0 ? "block" : "none";
+      document
+        .getElementById("emptyMessage")
+        .style.display =
+          found === 0
+            ? "block"
+            : "none";
+
     }
 
 
-    function filterCategory(category, element) {
+    /* ==============================
+       CATEGORIES
+       ============================== */
+
+    function filterCategory(
+      category,
+      element
+    ) {
 
       const cards =
         document.querySelectorAll(".card");
 
-      document.querySelectorAll(".category")
+      document
+        .querySelectorAll(".category")
         .forEach(button => {
+
           button.classList.remove("active");
+
         });
 
       element.classList.add("active");
@@ -684,20 +1210,34 @@
 
         if (
           category === "all" ||
-          card.getAttribute("data-category") === category
+          card.getAttribute("data-category")
+            === category
         ) {
+
           card.style.display = "";
           found++;
+
         } else {
+
           card.style.display = "none";
+
         }
 
       });
 
-      document.getElementById("emptyMessage").style.display =
-        found === 0 ? "block" : "none";
+      document
+        .getElementById("emptyMessage")
+        .style.display =
+          found === 0
+            ? "block"
+            : "none";
+
     }
 
+
+    /* ==============================
+       FAVORIS
+       ============================== */
 
     function showFavorites() {
 
@@ -711,32 +1251,520 @@
         const favorite =
           card.querySelector(".favorite");
 
-        if (favorite.classList.contains("active")) {
+        if (
+          favorite.classList.contains("active")
+        ) {
+
           card.style.display = "";
           found++;
+
         } else {
+
           card.style.display = "none";
+
         }
 
       });
 
-      document.getElementById("emptyMessage").style.display =
-        found === 0 ? "block" : "none";
+      document
+        .getElementById("emptyMessage")
+        .style.display =
+          found === 0
+            ? "block"
+            : "none";
 
-      document.getElementById("mobileMenu")
+      document
+        .getElementById("mobileMenu")
         .classList.remove("active");
 
-      document.getElementById("productsSection")
-        .scrollIntoView({ behavior: "smooth" });
+      document
+        .getElementById("productsSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+
     }
 
 
-    function contactProduct(productName) {
+    /* ==============================
+       PRODUIT
+       ============================== */
+
+    function contactProduct(
+      productName
+    ) {
 
       alert(
         "Vous avez sélectionné : " +
         productName +
         "\n\nLa page du produit sera ajoutée prochainement."
+      );
+
+    }
+
+
+    /* =====================================================
+       ROUE DE CHANCE
+       ===================================================== */
+
+    const wheelCanvas =
+      document.getElementById("wheelCanvas");
+
+    const wheelCtx =
+      wheelCanvas.getContext("2d");
+
+
+    /*
+      IMPORTANT :
+
+      Les deux résultats les plus fréquents
+      sont 5% et 10%.
+
+      "Hors chance" apparaît également.
+    */
+
+    const wheelSegments = [
+
+      {
+        text: "5%",
+        color: "#c9a27e"
+      },
+
+      {
+        text: "5%",
+        color: "#876b58"
+      },
+
+      {
+        text: "10%",
+        color: "#d7b58d"
+      },
+
+      {
+        text: "5%",
+        color: "#604638"
+      },
+
+      {
+        text: "Hors chance",
+        color: "#b9a99a"
+      },
+
+      {
+        text: "10%",
+        color: "#a87855"
+      },
+
+      {
+        text: "5%",
+        color: "#d2b79a"
+      },
+
+      {
+        text: "Hors chance",
+        color: "#765e51"
+      }
+
+    ];
+
+
+    let currentRotation = 0;
+
+    let isSpinning = false;
+
+
+    function drawWheel() {
+
+      const size = wheelCanvas.width;
+
+      const center = size / 2;
+
+      const radius = size / 2 - 8;
+
+      const segmentAngle =
+        (Math.PI * 2) /
+        wheelSegments.length;
+
+
+      wheelCtx.clearRect(
+        0,
+        0,
+        size,
+        size
+      );
+
+
+      wheelSegments.forEach(
+        (segment, index) => {
+
+          const startAngle =
+            -Math.PI / 2 +
+            index * segmentAngle;
+
+          const endAngle =
+            startAngle +
+            segmentAngle;
+
+
+          wheelCtx.beginPath();
+
+          wheelCtx.moveTo(
+            center,
+            center
+          );
+
+          wheelCtx.arc(
+            center,
+            center,
+            radius,
+            startAngle,
+            endAngle
+          );
+
+          wheelCtx.closePath();
+
+          wheelCtx.fillStyle =
+            segment.color;
+
+          wheelCtx.fill();
+
+          wheelCtx.strokeStyle =
+            "#fffaf5";
+
+          wheelCtx.lineWidth = 5;
+
+          wheelCtx.stroke();
+
+
+          /* النص */
+
+          wheelCtx.save();
+
+          wheelCtx.translate(
+            center,
+            center
+          );
+
+          wheelCtx.rotate(
+            startAngle +
+            segmentAngle / 2
+          );
+
+          wheelCtx.textAlign =
+            "center";
+
+          wheelCtx.textBaseline =
+            "middle";
+
+          wheelCtx.fillStyle =
+            "#ffffff";
+
+          wheelCtx.font =
+            segment.text === "Hors chance"
+              ? "bold 22px Arial"
+              : "bold 34px Arial";
+
+
+          wheelCtx.fillText(
+            segment.text,
+            radius * 0.62,
+            0
+          );
+
+          wheelCtx.restore();
+
+        }
+      );
+
+
+      /* دائرة خارجية */
+
+      wheelCtx.beginPath();
+
+      wheelCtx.arc(
+        center,
+        center,
+        radius,
+        0,
+        Math.PI * 2
+      );
+
+      wheelCtx.strokeStyle =
+        "#463329";
+
+      wheelCtx.lineWidth = 8;
+
+      wheelCtx.stroke();
+
+    }
+
+
+    drawWheel();
+
+
+    /*
+      التاريخ اليومي.
+
+      إذا دار الشخص العجلة اليوم،
+      لن تظهر له مرة أخرى حتى اليوم التالي.
+    */
+
+    function getTodayKey() {
+
+      const today =
+        new Date();
+
+      return (
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate()
+      );
+
+    }
+
+
+    function alreadyPlayedToday() {
+
+      const saved =
+        localStorage.getItem(
+          "sou9i_wheel_date"
+        );
+
+      return saved === getTodayKey();
+
+    }
+
+
+    function saveWheelDate() {
+
+      localStorage.setItem(
+        "sou9i_wheel_date",
+        getTodayKey()
+      );
+
+    }
+
+
+    /*
+      ظهور العجلة عند الدخول.
+    */
+
+    window.addEventListener(
+      "load",
+      function() {
+
+        setTimeout(
+          function() {
+
+            if (
+              !alreadyPlayedToday()
+            ) {
+
+              document
+                .getElementById("wheelOverlay")
+                .classList.add("show");
+
+            }
+
+          },
+          1200
+        );
+
+      }
+    );
+
+
+    function closeWheel() {
+
+      document
+        .getElementById("wheelOverlay")
+        .classList.remove("show");
+
+    }
+
+
+    /*
+      دوران العجلة.
+    */
+
+    function spinWheel() {
+
+      if (isSpinning) {
+        return;
+      }
+
+      isSpinning = true;
+
+
+      const button =
+        document.getElementById(
+          "spinButton"
+        );
+
+      button.disabled = true;
+
+      button.textContent =
+        "⏳ LA ROUE TOURNE...";
+
+
+      const resultBox =
+        document.getElementById(
+          "wheelResult"
+        );
+
+      resultBox.classList.remove("show");
+
+
+      /*
+        نختار النتيجة.
+
+        5% و10% لهما فرص أكبر.
+        "Hors chance" أقل ظهوراً.
+      */
+
+      const random =
+        Math.random();
+
+      let selectedIndex;
+
+
+      if (random < 0.40) {
+
+        selectedIndex =
+          Math.floor(
+            Math.random() * 4
+          );
+
+      } else if (random < 0.80) {
+
+        selectedIndex =
+          [2, 5][
+            Math.floor(
+              Math.random() * 2
+            )
+          ];
+
+      } else {
+
+        selectedIndex =
+          [4, 7][
+            Math.floor(
+              Math.random() * 2
+            )
+          ];
+
+      }
+
+
+      const segmentAngle =
+        360 /
+        wheelSegments.length;
+
+
+      /*
+        حساب زاوية الدوران حتى تصل
+        النتيجة المختارة إلى السهم.
+      */
+
+      const targetAngle =
+        360 -
+        (
+          selectedIndex *
+          segmentAngle +
+          segmentAngle / 2
+        );
+
+
+      const extraTurns = 5 * 360;
+
+      const finalRotation =
+        currentRotation +
+        extraTurns +
+        targetAngle -
+        (
+          currentRotation % 360
+        );
+
+
+      currentRotation =
+        finalRotation;
+
+
+      wheelCanvas.style.transition =
+        "transform 5s cubic-bezier(0.15, 0.75, 0.15, 1)";
+
+      wheelCanvas.style.transform =
+        "rotate(" +
+        finalRotation +
+        "deg)";
+
+
+      setTimeout(
+        function() {
+
+          const result =
+            wheelSegments[
+              selectedIndex
+            ].text;
+
+
+          if (result === "5%") {
+
+            resultBox.innerHTML =
+              "🎉 Félicitations !<br>" +
+              "Vous avez gagné <strong>5%</strong> de réduction.";
+
+          } else if (
+            result === "10%"
+          ) {
+
+            resultBox.innerHTML =
+              "🎉 Félicitations !<br>" +
+              "Vous avez gagné <strong>10%</strong> de réduction.";
+
+          } else {
+
+            resultBox.innerHTML =
+              "😔 Dommage !<br>" +
+              "Essayez votre chance demain.";
+
+          }
+
+
+          resultBox.classList.add(
+            "show"
+          );
+
+
+          saveWheelDate();
+
+
+          button.textContent =
+            "✓ TERMINÉ";
+
+
+          isSpinning = false;
+
+
+          /*
+            نغلق العجلة تلقائياً
+            بعد ظهور النتيجة.
+          */
+
+          setTimeout(
+            function() {
+
+              closeWheel();
+
+            },
+            3500
+          );
+
+
+        },
+        5100
       );
 
     }
